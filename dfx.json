@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "shoppinglist_backend": {
+      "main": "src/shoppinglist_backend/main.mo",
+      "type": "motoko"
+    },
+    "shoppinglist_frontend": {
+      "dependencies": [
+        "shoppinglist_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/shoppinglist_frontend/src/index.html"
+      },
+      "source": [
+        "src/shoppinglist_frontend/assets",
+        "dist/shoppinglist_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
