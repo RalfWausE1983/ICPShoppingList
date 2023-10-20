@@ -6,19 +6,26 @@
     <title>shoppinglist</title>
     <base href="/" />
     <link rel="icon" href="favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="main.css" />
+    <link type="text/css" rel="stylesheet" href="bulma/css/bulma.css" />
   </head>
   <body>
     <main>
-      <img src="logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#">
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting"></section>
+      <div class="columns ">
+        <div class="column"></div>
+        <div class="column"><div class="box has-text-centered mt-3"><img src="ShoppingCart.png" alt="A Shopping Cart" />
+          <br />
+          <br />
+          <div id="isLoadingAnimation"></div>
+                    <form action="#">
+            
+            <input class="input" id="item" alt="Shopping Cart Item" type="text" />
+            <button class="button is-dark mt-2" type="submit" id="submitButton">Auf die Liste</button>
+          </form>
+          <div id="itemsToBuy"></div>
+        </div></div>
+        <div class="column"></div>
+      </div>
+      
     </main>
   </body>
 </html>
