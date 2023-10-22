@@ -2,6 +2,7 @@ import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 import Iter "mo:base/Iter";
 import Buffer "mo:base/Buffer";
+import RBTree "mo:base/RBTree";
 
 actor {
 

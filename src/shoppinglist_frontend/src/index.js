@@ -36,61 +36,131 @@ const appendItemToList = (id,item) => {
 
 
 const removeFromList = async (itemToRemove) => {
-
-  isLoading();
-
-  await shoppinglist_backend.removeItemFromList(itemToRemove);
+   await shoppinglist_backend.removeItemFromList(itemToRemove);
   await getShoppingList();
-
-  finishedLoading();
-
 };
 
 
 
-document.querySelector("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const createWorkingPage = async () => {
 
-  const item = document.getElementById("item").value;
+  document.getElementById("container").innerHTML=""
 
-  isLoading();
+  let infotext = document.createElement("text")
+  infotext.classList.add("heading")
+  infotext.classList.add("is-italic")
 
-  await shoppinglist_backend.addItemToList(item);
-  getShoppingList();
+  infotext.textContent="Bitte einfach einen Artikel eintragen"
 
-  finishedLoading();
+  let shoppingListForm = document.createElement("form")
+
+  shoppingListForm.setAttribute("id","shoppingListForm")
+
+  shoppingListForm.setAttribute("action","#")
+
+  let itemToAddField = document.createElement("input")
+  itemToAddField.setAttribute("type","text")
+  itemToAddField.setAttribute("id","item")
+  itemToAddField.classList.add("input")
+
+  let submitButton = document.createElement("button")
+  submitButton.setAttribute("type","submit")
+  submitButton.textContent="Eintragen"
+  submitButton.classList.add("button")
+  submitButton.classList.add("is-dark")
+  submitButton.classList.add("mt-3")
   
-  document.getElementById("item").value="";
 
-  return false;
-});
-
-
-const isLoading = () => {
-
-  const loader= document.createElement("progress");
-  loader.setAttribute('id','loader');
-  loader.classList.add('progress','is-medium','is-danger');
+  shoppingListForm.appendChild(itemToAddField)
+  shoppingListForm.appendChild(submitButton)
 
 
-  const button = document.getElementById("submitButton");
-  const textfield = document.getElementById("itemsToBuy");
+  document.getElementById("container").append(infotext)
+  document.getElementById("container").append(shoppingListForm)
 
-  document.getElementById("isLoadingAnimation").appendChild(loader);
-
-  textfield.setAttribute("disabled", true);
-  button.setAttribute("disabled", true);
-
-};
-
-const finishedLoading = () => {
-  document.getElementById("isLoadingAnimation").innerHTML="";
+  let shoppinglistContainer = document.createElement("div")
   
-  const button = document.getElementById("submitButton");
-  const textfield = document.getElementById("itemsToBuy");
-  document.getElementById("isLoadingAnimation").style.visibility = "hidden";
-  textfield.removeAttribute("disabled");
-  button.removeAttribute("disabled");
+  shoppinglistContainer.setAttribute("id","itemsToBuy")
+
+  document.getElementById("container").append(shoppinglistContainer)
+
+  shoppingListForm.addEventListener('submit', async (e)=> {
+      e.preventDefault()
+      let item = document.getElementById("item").value
+    await shoppinglist_backend.addItemToList(item)
+
+    await getShoppingList()
+
+    item.value=""
+
+  })
+  
+  await getShoppingList()
+
+ 
 }
 
-await getShoppingList();
+
+const createLoginPage = ()=> {
+
+  
+
+  let infoField = document.createElement("text")
+  infoField.textContent="Login"
+  infoField.classList.add("heading")
+
+  let passwordForm = document.createElement("form")
+  passwordForm.setAttribute("id","passwordForm")
+  passwordForm.setAttribute("action","#")
+
+  let usernameField = document.createElement("input")
+  usernameField.setAttribute("type","text")
+  usernameField.setAttribute("id","username")
+  usernameField.classList.add("input")
+
+  let usernameFieldLabel = document.createElement("label")
+  usernameFieldLabel.setAttribute("for","username")
+  usernameFieldLabel.textContent="Benutzername:"
+
+  let passwordField = document.createElement("input")
+  passwordField.setAttribute("type","password")
+  passwordField.setAttribute("id","password")
+  passwordField.classList.add("input")
+
+  let passwordFieldLabel = document.createElement("label")
+  passwordFieldLabel.setAttribute("for","password")
+  passwordFieldLabel.textContent="Passwort:"
+
+  let submitButton=document.createElement("button")
+  submitButton.setAttribute("type","submit")
+  submitButton.classList.add("button")
+  submitButton.classList.add("is-dark")
+  submitButton.textContent="Login"
+
+  passwordForm.appendChild(usernameFieldLabel)
+  passwordForm.appendChild(usernameField)
+  passwordForm.appendChild(passwordFieldLabel)
+  passwordForm.appendChild(passwordField)
+  passwordForm.appendChild(submitButton)
+
+  document.getElementById("container").append(infoField)
+  document.getElementById("container").append(passwordForm)
+
+  passwordForm.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    createWorkingPage()
+  })
+
+
+
+ 
+
+} 
+
+
+
+createLoginPage()
+
+
+
+
