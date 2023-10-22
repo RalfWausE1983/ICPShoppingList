@@ -1,10 +1,10 @@
-import { shoppinglist_backend } from "../../declarations/shoppinglist_backend";
+import { shoppinglist_backend } from "../../declarations/shoppinglist_backend"
 
 
 const getShoppingList = async () => {
-  let shoppingList = await shoppinglist_backend.getShoppingItems();
+  let shoppingList = await shoppinglist_backend.getShoppingItems()
 
-  document.getElementById("itemsToBuy").innerHTML="";
+  document.getElementById("itemsToBuy").innerHTML=""
 
   if (shoppingList.length > 0 ){ 
     
@@ -13,23 +13,21 @@ const getShoppingList = async () => {
 
     }
     
-  };
-};
+  }
+}
 
 
 
 const appendItemToList = (id,item) => {
-  
-
-  let newItem = document.createElement("button");
-  newItem.textContent = item;
-  newItem.classList.add('button','is-rounded','mr-2','mt-2');
+  let newItem = document.createElement("button")
+  newItem.textContent = item
+  newItem.classList.add('button','is-rounded','mr-2','mt-2')
   newItem.addEventListener("click", ()=> {
     
-    removeFromList(id);
+    removeFromList(id)
   });
 
-  document.getElementById("itemsToBuy").append(newItem);
+  document.getElementById("itemsToBuy").append(newItem)
 
 
 }
@@ -37,8 +35,8 @@ const appendItemToList = (id,item) => {
 
 const removeFromList = async (itemToRemove) => {
    await shoppinglist_backend.removeItemFromList(itemToRemove);
-  await getShoppingList();
-};
+  await getShoppingList()
+}
 
 
 
@@ -150,11 +148,6 @@ const createLoginPage = ()=> {
     e.preventDefault()
     createWorkingPage()
   })
-
-
-
- 
-
 } 
 
 
